@@ -2,7 +2,7 @@ import fileinput
 
 def read():
     sequences = []
-    for line in fileinput.input("genetest.txt"):
+    for line in fileinput.input():
         if line == "0":
             return sequences
         else:
