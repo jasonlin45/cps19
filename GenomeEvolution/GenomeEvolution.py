@@ -2,7 +2,7 @@ import fileinput
 
 def read():
     sequences = []
-    for line in fileinput.input():
+    for line in fileinput.input("gene.txt"):
         if line == "0":
             return sequences
         else:
@@ -11,15 +11,16 @@ def read():
                 sequences.append(line.split())
 
 def calculate(seq1, seq2):
-    seq1subsets = []
-    seq2subsets = []
-    step = 2
-    while step <= len(seq1):
+    counter = 0
+    size = 2
+    while size <= len(seq1):
         start = 0
-        while start <= len(seq1)-step:
+        seq1subsets = []
+        seq2subsets = []
+        while start <= len(seq1)-size:
             sub1 = []
             sub2 = []
-            for i in range(start,start+step,1):
+            for i in range(start,start+size,1):
                 sub1.append(int(seq1[i]))
                 sub2.append(int(seq2[i]))
             sub1.sort()
@@ -27,19 +28,18 @@ def calculate(seq1, seq2):
             seq1subsets.append(sub1)
             seq2subsets.append(sub2)
             start+=1
-        step+=1
-    counter = 0
-    for seq1 in seq1subsets:
-        for seq2 in seq2subsets:
-            if len(seq1)==len(seq2):
-                match = True
-                i=0
-                while match and i<len(seq1):
-                    if seq1[i] != seq2[i]:
-                        match = False
-                    i+=1
-                if match:
-                    counter+=1
+        for subset1 in seq1subsets:
+            for subset2 in seq2subsets:
+                if len(subset1)==len(subset2):
+                    match = True
+                    i=0
+                    while match and i<len(subset1):
+                        if subset1[i] != subset2[i]:
+                            match = False
+                        i+=1
+                    if match:
+                        counter+=1
+        size += 1
     return counter
 
 
