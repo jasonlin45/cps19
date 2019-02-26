@@ -8,6 +8,7 @@ def read():
         else:
             cur = line.split()
             if len(cur) == 1:
+                pass
             else:
                 sequences.append(line.split())
 
@@ -16,7 +17,7 @@ def calculate(seq1, seq2):
     seq2subsets = []
     start = 0
     step = 2
-    while step < len(seq1)
+    while step < len(seq1):
         while start < len(seq1-2):
             for i in range(start,len(seq1),step):
                 sub1 = []
